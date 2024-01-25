@@ -83,15 +83,15 @@ const listenToEvents = async () => {
       return Promise.race([retry, waitForChange]);
     } else if (error instanceof Disconnected) {
       sendStatus(states.DISCONNECTED);
-      return new Promise((resolve) => setTimeout(resolve, 5000));
+      return new Promise((resolve) => setTimeout(resolve, 60000));
     } else if (error.message.indexOf('ENETUNREACH') != -1) {
       sendStatus(states.DISCONNECTED);
-      console.log('No Network, retry in 10 seconds');
-      return new Promise((resolve) => setTimeout(resolve, 10000));
+      console.log('No Network, retry in 24 seconds');
+      return new Promise((resolve) => setTimeout(resolve, 240000));
     } else if (error.code === 'ECONNREFUSED' || error.code === 'ERR_BAD_REQUEST') {
       sendStatus(states.DISCONNECTED);
-      console.log('Unifi Controller not reachable, retry in 10 seconds');
-      return new Promise((resolve) => setTimeout(resolve, 10000));
+      console.log('Unifi Controller not reachable, retry in 240 seconds');
+      return new Promise((resolve) => setTimeout(resolve, 240000));
     }
 
     sendStatus(states.WAIT_FOR_CONFIG);
