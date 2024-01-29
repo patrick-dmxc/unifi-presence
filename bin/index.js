@@ -94,8 +94,8 @@ const listenToEvents = async () => {
       return new Promise((resolve) => setTimeout(resolve, 240000));
     }
 
-    sendStatus(states.WAIT_FOR_CONFIG);
-    return waitForConfigChange(configFile);
+      sendStatus(states.DISCONNECTED);
+      return new Promise((resolve) => setTimeout(resolve, 300000));
   }
 };
 
